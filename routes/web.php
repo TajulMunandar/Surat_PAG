@@ -16,9 +16,10 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/layouts/index', function () {
+Route::get('/', function () {
     return view('layouts.index');
-})->name('layouts.index');
+});
+
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

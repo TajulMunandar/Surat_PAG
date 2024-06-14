@@ -3,6 +3,22 @@
     <div class="container-fluid">
         <!--  Row 1 -->
         <div class="row">
+            <div class="col-lg-12 mb-4">
+                <div class="card shadow-sm overflow-hidden">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <h5 class="card-title mb-3 fw-semibold">Di bawah merupakan surat-surat</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <div class="col-lg-4 mb-4">
                 <!-- Surat 1 -->
                 <div class="card overflow-hidden">
