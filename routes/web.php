@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/surat', [SuratController::class, 'index'])->name('index');
+Route::prefix('/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/surat-jsa', SuratController::class);
+});
