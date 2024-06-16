@@ -17,16 +17,16 @@ class Surat extends Model
 
     public function informasi_umum()
     {
-        return $this->hasMany(InformasiUmum::class, 'informasi_umum_id');
+        return $this->hasMany(InformasiUmum::class, 'id');
     }
 
     public function alat_pelindung()
     {
-        return $this->hasMany(AlatPelindung::class, 'alat_pelindung_id');
+        return $this->hasMany(AlatPelindung::class, 'id');
     }
 
     public function uraian()
     {
-        return $this->hasMany(Uraian::class, 'uraian_id');
+        return $this->hasMany(Uraian::class, 'id');
     }
 }

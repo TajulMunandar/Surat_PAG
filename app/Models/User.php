@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public function surat()
     {
-        return $this->hasMany(Surat::class, 'divisi_id');
+        return $this->hasMany(Surat::class, 'id');
     }
 
 
