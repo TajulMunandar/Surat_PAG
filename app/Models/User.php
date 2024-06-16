@@ -19,9 +19,6 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
-    protected $fillable = [
-        'name', 'role', 'no_karyawan', 'divisi_id'
-    ];
 
 
     public function divisi()

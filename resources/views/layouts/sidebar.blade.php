@@ -40,7 +40,7 @@
                   </li>
 
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
+                      <a class="sidebar-link" href="{{ route('divisi.index') }}" aria-expanded="false">
                           <span>
                               <i class="ti ti-building"></i>
                           </span>
@@ -48,7 +48,7 @@
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
+                      <a class="sidebar-link" href="{{ route('user.index') }}" aria-expanded="false">
                           <span>
                               <i class="ti ti-user-plus"></i>
                           </span>
