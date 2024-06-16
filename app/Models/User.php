@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guarded = ['id'];
+
     protected $fillable = [
         'name', 'role', 'no_karyawan', 'divisi_id'
     ];
@@ -24,8 +26,14 @@ class User extends Authenticatable
 
     public function divisi()
     {
-        return $this->belongsTo(divisi::class, 'sppd_id');
+        return $this->belongsTo(Divisi::class, 'divisi_id');
     }
+
+    public function surat()
+    {
+        return $this->hasMany(Surat::class, 'divisi_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

@@ -8,6 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Surat extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
-    protected $fillable = ['user_id', 'jenis'];
+    public function user()
+    {
+        return $this->belongsTo(user::class, 'user_id');
+    }
+
+    public function informasi_umum()
+    {
+        return $this->hasMany(InformasiUmum::class, 'informasi_umum_id');
+    }
+
+    public function alat_pelindung()
+    {
+        return $this->hasMany(AlatPelindung::class, 'alat_pelindung_id');
+    }
+
+    public function uraian()
+    {
+        return $this->hasMany(Uraian::class, 'uraian_id');
+    }
 }

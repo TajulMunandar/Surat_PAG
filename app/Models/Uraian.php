@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Divisi extends Model
+class Uraian extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
-    protected $fillable = ['nama_divisi'];
-
-    public function user()
+    public function surat()
     {
-        return $this->hasMany(user::class, 'user_id');
+        return $this->belongsTo(Surat::class, 'surat_id');
     }
 }
