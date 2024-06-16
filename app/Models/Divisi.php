@@ -13,6 +13,6 @@ class Divisi extends Model
 
     public function user()
     {
-        return $this->hasMany(user::class, 'user_id');
+        return $this->hasMany(user::class, 'id');
     }
 }
