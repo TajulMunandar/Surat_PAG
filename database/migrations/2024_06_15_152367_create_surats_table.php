@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict');
-            $table->string('jenis');
+            $table->tinyInteger('jenis');
             $table->timestamps();
         });
     }

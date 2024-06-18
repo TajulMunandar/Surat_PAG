@@ -10,7 +10,7 @@ class Surat extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function user()
+    public function users()
     {
         return $this->belongsTo(user::class, 'user_id');
     }

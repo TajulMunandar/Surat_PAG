@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Divisi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -79,7 +80,6 @@ class UserController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required',
-                'password' => 'sometimes',
                 'role' => 'required',
                 'no_karyawan' => 'required|unique:users,no_karyawan,' . $id,
                 'divisi_id' => 'required|exists:divisis,id',
@@ -113,6 +113,33 @@ class UserController extends Controller
             return redirect('/dashboard/user')->with('success', 'User berhasil dihapus!');
         } catch (\Exception $exception) {
             return redirect()->route('user.index')->with('failed', 'Data gagal dihapus! ' . $exception->getMessage());
+        }
+    }
+
+
+    public function resetPasswordAdmin(Request $request)
+    {
+        try {
+            $rules = [
+                'password' => 'required',
+            ];
+
+            if ($request->password == $request->password2) {
+                $validatedData = $request->validate($rules);
+                $validatedData['password'] = Hash::make($validatedData['password']);
+
+                User::where('id', $request->id)->update($validatedData);
+            } else {
+                return back()->with('failed', 'Konfirmasi password tidak sesuai');
+            }
+
+            return redirect('/dashboard/user')->with('success', 'Password berhasil direset!');
+        } catch (ValidationException $e) {
+            // Tangani kesalahan validasi
+            return redirect()->back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            // Tangani kesalahan umum lainnya
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
 }
