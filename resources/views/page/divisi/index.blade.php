@@ -44,23 +44,82 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $divisi->nama_divisi }}</td>
                                     <td>
-                                        {{-- <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                            data-bs-target="#editModal"
-                                            onclick="setEditForm('{{ route('divisi.update', $divisi->id) }}', '{{ $divisi->nama_divisi }}')">
-                                            <i class="ti ti-eye"></i>
-                                        </button> --}}
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                            data-bs-target="#editModal"
-                                            onclick="setEditForm('{{ route('divisi.update', $divisi->id) }}', '{{ $divisi->nama_divisi }}')">
+                                            data-bs-target="#editModal{{ $loop->iteration }}">
                                             <i class="ti ti-edit"></i>
                                         </button>
                                         <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#modalHapus"
-                                            onclick="setDeleteForm('{{ route('divisi.destroy', $divisi->id) }}')">
+                                            data-bs-target="#modalHapus{{ $loop->iteration }}">
                                             <i class="ti ti-trash"></i>
                                         </button>
                                     </td>
                                 </tr>
+
+                                <!-- Modal Edit -->
+                                <div class="modal fade" id="editModal{{ $loop->iteration }}" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5">Edit Divisi</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('divisi.update', $divisi->id) }}" method="post"
+                                                id="editForm">
+                                                <div class="modal-body">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="mb-3">
+                                                        <label for="edit_nama_divisi" class="form-label">Nama Divisi</label>
+                                                        <input type="text"
+                                                            class="form-control @error('nama_divisi') is-invalid @enderror"
+                                                            name="nama_divisi" id="edit_nama_divisi"
+                                                            value="{{ old('nama_divisi', $divisi->nama_divisi) }}" autofocus
+                                                            required>
+                                                        @error('nama_divisi')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Hapus -->
+                                <div class="modal fade" id="modalHapus{{ $loop->iteration }}" tabindex="-1"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5">Hapus Divisi</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post"
+                                                id="deleteForm">
+                                                <div class="modal-body">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <p>Apakah Anda yakin ingin menghapus divisi ini?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -69,61 +128,8 @@
         </div>
     </div>
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5">Edit Divisi</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('divisi.update', $divisi->id) }}" method="post" id="editForm">
-                    <div class="modal-body">
-                        @csrf
-                        @method('PUT')
-                        <div class="mb-3">
-                            <label for="edit_nama_divisi" class="form-label">Nama Divisi</label>
-                            <input type="text" class="form-control @error('nama_divisi') is-invalid @enderror"
-                                name="nama_divisi" id="edit_nama_divisi" value="{{ old('nama_divisi') }}" autofocus
-                                required>
-                            @error('nama_divisi')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal Hapus -->
-    <div class="modal fade" id="modalHapus" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5">Hapus Divisi</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('divisi.destroy', $divisi->id) }}" method="post" id="deleteForm">
-                    <div class="modal-body">
-                        @csrf
-                        @method('DELETE')
-                        <p>Apakah Anda yakin ingin menghapus divisi ini?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 
 
     {{-- add Modal Tambah --}}
