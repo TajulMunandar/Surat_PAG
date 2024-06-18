@@ -16,7 +16,7 @@ class PeminjamanController extends Controller
         $title = "Surat Peminjaman";
         $breadcrumb = "Surat Peminjaman";
         $users = User::all();
-        $peminjamans = Surat::Where('jenis', 2)->with('users')->get();
+        $peminjamans = Surat::Where('jenis', 3)->with('users')->get();
         return view('page.surat.peminjaman.index')->with(compact('title', 'breadcrumb', 'users', 'peminjamans'));
     }
 
