@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('tanda_tangan');
             $table->string('nama_pengawas');
             $table->string('seksi_pengawas');
-            $table->string('tanggal');
+            $table->date('tanggal');
             $table->string('ttd_pengawas');
             $table->foreignId('surat_id')->constrained('surats')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();

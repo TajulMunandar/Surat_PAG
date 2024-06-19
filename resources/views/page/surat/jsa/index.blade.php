@@ -56,9 +56,16 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $jsa->users->name }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.show', $jsa->id) }}">
-                                            <i class="ti ti-eye"></i>
-                                        </a>
+                                        @if ($jsa->informasi_umum && $jsa->alat_pelindung && $jsa->uraian)
+                                            <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.edit', $jsa->id) }}">
+                                                <i class="ti ti-eye"></i>
+                                            </a>
+                                        @else
+                                            <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.show', $jsa->id) }}">
+                                                <i class="ti ti-eye"></i>
+                                            </a>
+                                        @endif
+
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $loop->iteration }}">
                                             <i class="ti ti-edit"></i>

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlatPelindung;
+use App\Models\InformasiUmum;
 use App\Models\User;
 use App\Models\Surat;
+use App\Models\Uraian;
 use Illuminate\Http\Request;
 
 class JsaController extends Controller
@@ -48,16 +51,21 @@ class JsaController extends Controller
     public function show(Surat $surat_jsa)
     {
         $title = "Detail Surat JSA";
-        $breadcrumb = "Detail Surat JSA";
+        $breadcrumb = "Tambah Detail Surat JSA";
         return view('page.surat.jsa.create')->with(compact('surat_jsa', 'title', 'breadcrumb'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Surat $surat_jsa)
     {
-        //
+        $informasi = InformasiUmum::where('surat_id', $surat_jsa->id)->first();
+        $alat = AlatPelindung::where('surat_id', $surat_jsa->id)->first();
+        $uraian = Uraian::where('surat_id', $surat_jsa->id)->get();
+        $title = "Detail Surat JSA";
+        $breadcrumb = "Edit Detail Surat JSA";
+        return view('page.surat.jsa.edit')->with(compact('surat_jsa', 'title', 'breadcrumb', 'informasi', 'alat', 'uraian'));
     }
 
     /**

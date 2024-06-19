@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SuratController;
+
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\JsaController;
+use App\Http\Controllers\JsaDetailController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\UserController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('page.Dashboard');
+    return redirect('/dashboard');
 });
 
 
@@ -30,6 +31,7 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::prefix('/surat')->group(function () {
         Route::resource('/surat-jsa', JsaController::class);
+        Route::resource('/surat-jsa-detail', JsaDetailController::class);
 
         Route::resource('/surat-magang', MagangController::class);
 
