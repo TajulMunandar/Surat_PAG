@@ -57,9 +57,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $peminjaman->users->name }}</td>
                                     <td>
-                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#">
+                                        <a class="btn btn-sm btn-info"
+                                            href="{{ route('surat-magang.show', $peminjaman->id) }}">
                                             <i class="ti ti-eye"></i>
-                                        </button>
+                                        </a>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $loop->iteration }}">
                                             <i class="ti ti-edit"></i>

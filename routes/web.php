@@ -27,11 +27,15 @@ Route::get('/', function () {
 
 Route::prefix('/dashboard')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/surat-jsa', JsaController::class);
 
-    Route::resource('/surat-magang', MagangController::class);
+    Route::prefix('/surat')->group(function () {
+        Route::resource('/surat-jsa', JsaController::class);
 
-    Route::resource('/surat-peminjaman', PeminjamanController::class);
+        Route::resource('/surat-magang', MagangController::class);
+
+        Route::resource('/surat-peminjaman', PeminjamanController::class);
+    });
+
 
     Route::resource('/user', UserController::class);
     Route::post('/user/reset-password', [UserController::class, 'resetPasswordAdmin'])->name('user.resetPasswordAdmin');

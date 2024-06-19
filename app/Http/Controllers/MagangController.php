@@ -40,15 +40,17 @@ class MagangController extends Controller
 
         Surat::create($validatedData);
 
-        return redirect('/dashboard/surat-magang')->with('success', 'Surat baru berhasil dibuat!');
+        return redirect('/dashboard/surat/surat-magang')->with('success', 'Surat baru berhasil dibuat!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Surat $surat_magang)
     {
-        //
+        $title = "Detail Surat Magang";
+        $breadcrumb = "Detail Surat Magang";
+        return view('page.surat.magang.create')->with(compact('surat_magang', 'title', 'breadcrumb'));
     }
 
     /**
@@ -72,7 +74,7 @@ class MagangController extends Controller
             $magang = Surat::findOrFail($id);
             $magang->update($validatedData);
 
-            return redirect('/dashboard/surat-magang')->with('success', 'Surat  berhasil diperbarui!');
+            return redirect('/dashboard/surat/surat-magang')->with('success', 'Surat  berhasil diperbarui!');
         } catch (\Illuminate\Validation\ValidationException $exception) {
             return redirect()->route('surat-magang.index')->with('failed', 'Data gagal diperbarui! ' . $exception->getMessage());
         }
@@ -89,7 +91,7 @@ class MagangController extends Controller
 
             $magang->delete();
 
-            return redirect('/dashboard/surat-magang')->with('success', 'Surat berhasil dihapus!');
+            return redirect('/dashboard/surat/surat-magang')->with('success', 'Surat berhasil dihapus!');
         } catch (\Exception $exception) {
             return redirect()->route('surat-magang.index')->with('failed', 'Data gagal dihapus! ' . $exception->getMessage());
         }

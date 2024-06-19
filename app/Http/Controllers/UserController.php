@@ -41,7 +41,7 @@ class UserController extends Controller
                 'name' => 'required',
                 'password' => 'required',
                 'role' => 'required',
-                'no_karyawan' => 'required|unique:users',
+                'no_karyawan' => 'required|unique:users|numeric',
                 'divisi_id' => 'required|exists:divisis,id',
             ]);
 

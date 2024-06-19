@@ -40,15 +40,17 @@ class PeminjamanController extends Controller
 
         Surat::create($validatedData);
 
-        return redirect('/dashboard/surat-peminjaman')->with('success', 'Surat baru berhasil dibuat!');
+        return redirect('/dashboard/surat/surat-peminjaman')->with('success', 'Surat baru berhasil dibuat!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Surat $surat_magang)
     {
-        //
+        $title = "Detail Surat Peminjaman";
+        $breadcrumb = "Detail Surat Peminajaman";
+        return view('page.surat.peminjaman.create')->with(compact('surat_magang', 'title', 'breadcrumb'));
     }
 
     /**
@@ -72,7 +74,7 @@ class PeminjamanController extends Controller
             $peminjaman = Surat::findOrFail($id);
             $peminjaman->update($validatedData);
 
-            return redirect('/dashboard/surat-peminjaman')->with('success', 'Surat  berhasil diperbarui!');
+            return redirect('/dashboard/surat/surat-peminjaman')->with('success', 'Surat  berhasil diperbarui!');
         } catch (\Illuminate\Validation\ValidationException $exception) {
             return redirect()->route('surat-peminjaman.index')->with('failed', 'Data gagal diperbarui! ' . $exception->getMessage());
         }
@@ -89,7 +91,7 @@ class PeminjamanController extends Controller
 
             $peminjaman->delete();
 
-            return redirect('/dashboard/surat-peminjaman')->with('success', 'Surat berhasil dihapus!');
+            return redirect('/dashboard/surat/surat-peminjaman')->with('success', 'Surat berhasil dihapus!');
         } catch (\Exception $exception) {
             return redirect()->route('surat-peminjaman.index')->with('failed', 'Data gagal dihapus! ' . $exception->getMessage());
         }

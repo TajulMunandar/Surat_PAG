@@ -39,7 +39,7 @@ class JsaController extends Controller
 
         Surat::create($validatedData);
 
-        return redirect('/dashboard/surat-jsa')->with('success', 'Surat baru berhasil dibuat!');
+        return redirect('/dashboard/surat/surat-jsa')->with('success', 'Surat baru berhasil dibuat!');
     }
 
     /**
@@ -73,7 +73,7 @@ class JsaController extends Controller
             $jsa = Surat::findOrFail($id);
             $jsa->update($validatedData);
 
-            return redirect('/dashboard/surat-jsa')->with('success', 'Surat  berhasil diperbarui!');
+            return redirect('/dashboard/surat/surat-jsa')->with('success', 'Surat  berhasil diperbarui!');
         } catch (\Illuminate\Validation\ValidationException $exception) {
             return redirect()->route('surat-jsa.index')->with('failed', 'Data gagal diperbarui! ' . $exception->getMessage());
         }
@@ -90,7 +90,7 @@ class JsaController extends Controller
 
             $jsa->delete();
 
-            return redirect('/dashboard/surat-jsa')->with('success', 'Surat berhasil dihapus!');
+            return redirect('/dashboard/surat/surat-jsa')->with('success', 'Surat berhasil dihapus!');
         } catch (\Exception $exception) {
             return redirect()->route('surat-jsa.index')->with('failed', 'Data gagal dihapus! ' . $exception->getMessage());
         }
