@@ -25,7 +25,6 @@ class JsaController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -46,9 +45,11 @@ class JsaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Surat $surat_jsa)
     {
-        //
+        $title = "Detail Surat JSA";
+        $breadcrumb = "Detail Surat JSA";
+        return view('page.surat.jsa.create')->with(compact('surat_jsa', 'title', 'breadcrumb'));
     }
 
     /**
