@@ -94,9 +94,25 @@ class JsaController extends Controller
     {
         try {
 
-            $jsa = Surat::findOrFail($id);
+            $surat = Surat::findOrFail($id);
 
-            $jsa->delete();
+            // Menghapus relasi AlatPelindung
+            $surat->alat_pelindung->each(function ($alatPelindung) {
+                $alatPelindung->delete();
+            });
+
+            // Menghapus relasi InformasiUmum
+            $surat->informasi_umum->each(function ($informasiUmum) {
+                $informasiUmum->delete();
+            });
+
+            // Menghapus relasi Uraian
+            $surat->uraian->each(function ($uraian) {
+                $uraian->delete();
+            });
+
+            // Hapus surat
+            Surat::destroy($surat->id);
 
             return redirect('/dashboard/surat/surat-jsa')->with('success', 'Surat berhasil dihapus!');
         } catch (\Exception $exception) {

@@ -56,13 +56,13 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $jsa->users->name }}</td>
                                     <td>
-                                        @if ($jsa->informasi_umum && $jsa->alat_pelindung && $jsa->uraian)
+                                        @if ($jsa->informasi_umum->isNotEmpty() && $jsa->alat_pelindung->isNotEmpty() && $jsa->uraian->isNotEmpty())
                                             <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.edit', $jsa->id) }}">
-                                                <i class="ti ti-eye"></i>
+                                                <i class="ti ti-eye"></i> Edit
                                             </a>
                                         @else
                                             <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.show', $jsa->id) }}">
-                                                <i class="ti ti-eye"></i>
+                                                <i class="ti ti-eye"></i> Show
                                             </a>
                                         @endif
 
