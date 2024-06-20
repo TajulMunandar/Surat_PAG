@@ -29,7 +29,7 @@
 
         <a href="{{ route('surat-jsa.index') }}" class="mb-3 btn btn-outline-secondary">Kembali</a>
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('surat-jsa-detail.update', $surat_jsa->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <input type="hidden" value="{{ $surat_jsa->id }}" name="surat">
@@ -154,7 +154,7 @@
                                 <div class="col-12 mb-3">
                                     <label for="pertimbangan_lain" class="form-label">Pertimbangan Lain</label>
                                     <textarea class="form-control @error('pertimbangan_lain') is-invalid @enderror" id="pertimbangan_lain"
-                                        name="pertimbangan_lain" rows="3" required>{{ old('pertimbangan_lain', $alat->pertimbangan_lain ?? '') }}</textarea>
+                                        name="pertimbangan_lain" rows="3"> {{ $alat->pertimbangan_lain }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -165,76 +165,93 @@
                     <!-- Yearly Breakup -->
                     <div class="card overflow-hidden shadow p-2">
                         <div class="card-body p-5">
-                            <h5 class="card-title mb-9 fw-semibold">Daftar Identifikasi Bahaya dan Pengendalian</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dynamicAddRemove">
-                                    <tr>
-                                        <th>Langkah Kerja</th>
-                                        <th>Bahaya Kecelakaan</th>
-                                        <th>Tindakan Kecelakaan</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    {{-- {{ dd($uraian) }} --}}
-                                    @if (old('langkah_kerja'))
-                                        @foreach (old('langkah_kerja') as $index => $oldLangkahKerja)
-                                            <tr>
-                                                <td>
-                                                    <textarea name="langkah_kerja[]" class="form-control" required>{{ $oldLangkahKerja }}</textarea>
-                                                </td>
-                                                <td>
-                                                    <textarea name="potensi_bahaya[]" class="form-control" required>{{ old('potensi_bahaya.' . $index) }}</textarea>
-                                                </td>
-                                                <td>
-                                                    <textarea name="pengendalian[]" class="form-control" required>{{ old('pengendalian.' . $index) }}</textarea>
-                                                </td>
-                                                <td><button type="button"
-                                                        class="btn btn-danger remove-input-field">Delete</button></td>
-                                            </tr>
-                                        @endforeach
-                                    @elseif ($uraian)
-                                        @foreach ($uraian as $uraian_item)
-                                            <tr>
-                                                <td>
-                                                    <textarea name="langkah_kerja[]" class="form-control" required>{{ $uraian_item->langkah_kerja }}</textarea>
-                                                </td>
-                                                <td>
-                                                    <textarea name="bahaya_kecelakaan[]" class="form-control" required>{{ $uraian_item->bahaya_kecelakaan }}</textarea>
-                                                </td>
-                                                <td>
-                                                    <textarea name="tindakan_pencegahan[]" class="form-control" required>{{ $uraian_item->tindakan_pencegahan }}</textarea>
-                                                </td>
-                                                <td>
-                                                    <button type="button"
-                                                        class="btn btn-danger remove-input-field">Delete</button>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </table>
-                                <button type="button" name="add" id="dynamic-ar"
-                                    class="btn btn-outline-primary">Add Item</button>
+                            <h5 class="card-title mb-9 fw-semibold">Uraian Analisa Keselamatan Pekerjaan</h5>
+                            <div id="uraianAnalisaKeselamatan" class="pe-4">
+                                <div class="uraian-item row mb-3">
+                                    <div class="col-3 mb-3">
+                                        <label for="langkah_kerja" class="form-label">Langkah Kerja</label>
+                                        <input type="text"
+                                            class="form-control @error('langkah_kerja.*') is-invalid @enderror"
+                                            id="langkah_kerja" name="langkah_kerja[]" required>
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <label for="bahaya_kecelakaan" class="form-label">Bahaya Kecelakaan</label>
+                                        <input type="text"
+                                            class="form-control @error('bahaya_kecelakaan.*') is-invalid @enderror"
+                                            id="bahaya_kecelakaan" name="bahaya_kecelakaan[]" required>
+                                    </div>
+                                    <div class="col-4 mb-3">
+                                        <label for="tindakan_pencegahan" class="form-label">Tindakan Pencegahan</label>
+                                        <input type="text"
+                                            class="form-control @error('tindakan_pencegahan.*') is-invalid @enderror"
+                                            id="tindakan_pencegahan" name="tindakan_pencegahan[]" required>
+                                    </div>
+                                    <div class="col-1 mb-3 d-flex align-items-end">
+                                        <button type="button" class="btn btn-danger remove-item me-1">
+                                            <i class="ti ti-minus fs-3"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-primary add-item">
+                                            <i class="ti ti-plus fs-3"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                @foreach ($uraians as $uraian)
+                                    <div class="uraian-item row mb-3">
+                                        <div class="col-3 mb-3">
+                                            <input type="text"
+                                                class="form-control @error('langkah_kerja.*') is-invalid @enderror"
+                                                name="langkah_kerja[]" value="{{ $uraian->langkah_kerja }}" required>
+                                        </div>
+                                        <div class="col-4 mb-3">
+                                            <input type="text"
+                                                class="form-control @error('bahaya_kecelakaan.*') is-invalid @enderror"
+                                                name="bahaya_kecelakaan[]" value="{{ $uraian->bahaya_kecelakaan }}"
+                                                required>
+                                        </div>
+                                        <div class="col-4 mb-3">
+                                            <input type="text"
+                                                class="form-control @error('tindakan_pencegahan.*') is-invalid @enderror"
+                                                name="tindakan_pencegahan[]" value="{{ $uraian->tindakan_pencegahan }}"
+                                                required>
+                                        </div>
+                                        <div class="col-1 mb-3 d-flex align-items-end">
+                                            <button type="button" class="btn btn-danger remove-item me-1">
+                                                <i class="ti ti-minus fs-3"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-primary add-item">
+                                                <i class="ti ti-plus fs-3"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <button class="btn btn-primary mt-4" type="submit">Submit</button>
-                            <a href="{{ route('surat-jsa.index') }}" class="btn btn-danger mt-4">Cancel</a>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     </div>
 @endsection
 
-@section('scripts')
-    <script>
-        var i = 0;
-        $("#dynamic-ar").click(function() {
-            ++i;
-            $("#dynamicAddRemove").append(
-                '<tr><td><textarea name="langkah_kerja[]" class="form-control" required></textarea></td><td><textarea name="potensi_bahaya[]" class="form-control" required></textarea></td><td><textarea name="pengendalian[]" class="form-control" required></textarea></td><td><button type="button" class="btn btn-danger remove-input-field">Delete</button></td></tr>'
-            );
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('uraianAnalisaKeselamatan').addEventListener('click', function(e) {
+            if (e.target.closest('.add-item')) {
+                const uraianItem = e.target.closest('.uraian-item');
+                const newItem = uraianItem.cloneNode(true);
+                newItem.querySelectorAll('input').forEach(input => input.value = '');
+                document.getElementById('uraianAnalisaKeselamatan').appendChild(newItem);
+            }
+
+            if (e.target.closest('.remove-item')) {
+                const uraianItems = document.querySelectorAll('.uraian-item');
+                if (uraianItems.length > 1) {
+                    e.target.closest('.uraian-item').remove();
+                } else {
+                    alert('Minimal harus ada satu uraian.');
+                }
+            }
         });
-        $(document).on('click', '.remove-input-field', function() {
-            $(this).parents('tr').remove();
-        });
-    </script>
-@endsection
+    });
+</script>

@@ -62,10 +62,10 @@ class JsaController extends Controller
     {
         $informasi = InformasiUmum::where('surat_id', $surat_jsa->id)->first();
         $alat = AlatPelindung::where('surat_id', $surat_jsa->id)->first();
-        $uraian = Uraian::where('surat_id', $surat_jsa->id)->get();
+        $uraians = Uraian::where('surat_id', $surat_jsa->id)->get();
         $title = "Detail Surat JSA";
         $breadcrumb = "Edit Detail Surat JSA";
-        return view('page.surat.jsa.edit')->with(compact('surat_jsa', 'title', 'breadcrumb', 'informasi', 'alat', 'uraian'));
+        return view('page.surat.jsa.edit')->with(compact('surat_jsa', 'title', 'breadcrumb', 'informasi', 'alat', 'uraians'));
     }
 
     /**
