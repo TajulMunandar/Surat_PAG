@@ -167,34 +167,6 @@
                         <div class="card-body p-5">
                             <h5 class="card-title mb-9 fw-semibold">Uraian Analisa Keselamatan Pekerjaan</h5>
                             <div id="uraianAnalisaKeselamatan" class="pe-4">
-                                <div class="uraian-item row mb-3">
-                                    <div class="col-3 mb-3">
-                                        <label for="langkah_kerja" class="form-label">Langkah Kerja</label>
-                                        <input type="text"
-                                            class="form-control @error('langkah_kerja.*') is-invalid @enderror"
-                                            id="langkah_kerja" name="langkah_kerja[]" required>
-                                    </div>
-                                    <div class="col-4 mb-3">
-                                        <label for="bahaya_kecelakaan" class="form-label">Bahaya Kecelakaan</label>
-                                        <input type="text"
-                                            class="form-control @error('bahaya_kecelakaan.*') is-invalid @enderror"
-                                            id="bahaya_kecelakaan" name="bahaya_kecelakaan[]" required>
-                                    </div>
-                                    <div class="col-4 mb-3">
-                                        <label for="tindakan_pencegahan" class="form-label">Tindakan Pencegahan</label>
-                                        <input type="text"
-                                            class="form-control @error('tindakan_pencegahan.*') is-invalid @enderror"
-                                            id="tindakan_pencegahan" name="tindakan_pencegahan[]" required>
-                                    </div>
-                                    <div class="col-1 mb-3 d-flex align-items-end">
-                                        <button type="button" class="btn btn-danger remove-item me-1">
-                                            <i class="ti ti-minus fs-3"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-primary add-item">
-                                            <i class="ti ti-plus fs-3"></i>
-                                        </button>
-                                    </div>
-                                </div>
                                 @foreach ($uraians as $uraian)
                                     <div class="uraian-item row mb-3">
                                         <div class="col-3 mb-3">
