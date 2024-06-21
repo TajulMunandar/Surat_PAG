@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('fungsi');
             $table->string('it_recommendation');
             $table->text('reason');
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('restrict')->nullable();
+            $table->foreignId('approved1')->constrained('users')->onUpdate('cascade')->onDelete('restrict')->nullable();
+            $table->foreignId('approve2')->constrained('users')->onUpdate('cascade')->onDelete('restrict')->nullable();
             $table->date('assigned_to');
             $table->tinyInteger('priority');
             $table->text('action');
