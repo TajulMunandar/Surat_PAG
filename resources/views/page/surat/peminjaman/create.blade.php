@@ -110,15 +110,15 @@
                                                 for="{{ str_replace(' ', '_', strtolower($software)) }}">{{ $software }}</label>
                                         </div>
                                     @endforeach
-                                    <div class="form-check me-4">
-                                        <input type="checkbox" class="form-check-input" id="software_other"
-                                            name="software[]" value="other">
-                                        <label class="form-check-label" for="software_other">Other</label>
-                                    </div>
-                                    <textarea class="form-control d-none mt-3" id="software_other_text" name="software_other_text" rows="2"
-                                        placeholder="Please specify"></textarea>
                                 </div>
                             </div>
+                            <div class="form-check me-4 mb-2">
+                                <input type="checkbox" class="form-check-input" id="software_other" name="software[]"
+                                    value="other">
+                                <label class="form-check-label" for="software_other">Other</label>
+                            </div>
+                            <textarea class="form-control d-none mt-3" id="software_other_text" name="software_other_text" rows="2"
+                                placeholder="Please specify"></textarea>
 
                             <div class="row">
                                 <label for="hardware" class="form-label">Hardware</label>
@@ -135,22 +135,20 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="data_komunikasi"
-                                        name="data_komunikasi" value="data_komunikasi">
-                                    <label class="form-check-label" for="data_komunikasi">Data Communication</label>
-                                </div>
+
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="data_komunikasi"
+                                    name="data_komunikasi" value="data_komunikasi">
+                                <label class="form-check-label" for="data_komunikasi">Data Communication</label>
                             </div>
 
-                            <div class="row">
-                                <div class="form-check mb-3">
-                                    <input type="checkbox" class="form-check-input" id="phone" name="phone"
-                                        value="phone">
-                                    <label class="form-check-label" for="phone">User ID - Lampirkan Form-124 permintaan
-                                        User ID -</label>
-                                </div>
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="phone" name="phone"
+                                    value="phone">
+                                <label class="form-check-label" for="phone">User ID - Lampirkan Form-124 permintaan
+                                    User ID -</label>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -202,17 +200,22 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="it_recommendation" class="form-label">IT Recommendation</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input @error('it_recommendation') is-invalid @enderror"
-                                            type="radio" name="it_recommendation" id="accepted" value="accepted"
-                                            required>
-                                        <label class="form-check-label" for="accepted">Accepted</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input @error('it_recommendation') is-invalid @enderror"
-                                            type="radio" name="it_recommendation" id="not_accepted"
-                                            value="not_accepted" required>
-                                        <label class="form-check-label" for="not_accepted">Not Accepted</label>
+                                    <div class="col d-flex ">
+
+                                        <div class="form-check me-3 fs-3">
+                                            <input
+                                                class="form-check-input @error('it_recommendation') is-invalid @enderror"
+                                                type="radio" name="it_recommendation" id="accepted" value="accepted"
+                                                required>
+                                            <label class="form-check-label" for="accepted">Accepted</label>
+                                        </div>
+                                        <div class="form-check fs-3">
+                                            <input
+                                                class="form-check-input @error('it_recommendation') is-invalid @enderror"
+                                                type="radio" name="it_recommendation" id="not_accepted"
+                                                value="not_accepted" required>
+                                            <label class="form-check-label" for="not_accepted">Not Accepted</label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="mb-3">

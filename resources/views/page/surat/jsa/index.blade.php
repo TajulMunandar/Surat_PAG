@@ -29,9 +29,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('surat-jsa.index') }}">JSA</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('surat-magang.index') }}">Magang</a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('surat-peminjaman.index') }}">Peminjaman</a>
                     </li>
