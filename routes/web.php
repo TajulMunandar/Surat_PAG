@@ -8,6 +8,7 @@ use App\Http\Controllers\JsaController;
 use App\Http\Controllers\JsaDetailController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PeminjamanDetailController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -36,6 +37,7 @@ Route::prefix('/dashboard')->group(function () {
         Route::resource('/surat-magang', MagangController::class);
 
         Route::resource('/surat-peminjaman', PeminjamanController::class);
+        Route::resource('/surat-peminjaman-detail', PeminjamanDetailController::class);
     });
 
 

@@ -52,7 +52,8 @@ class PeminjamanController extends Controller
         $title = "Detail Surat Peminjaman";
         $breadcrumb = "Detail Surat Peminajaman";
         $divisis = Divisi::all();
-        return view('page.surat.peminjaman.create')->with(compact('surat_peminjaman', 'title', 'breadcrumb', 'divisis'));
+        $users = User::all();
+        return view('page.surat.peminjaman.create')->with(compact('surat_peminjaman', 'title', 'breadcrumb', 'divisis', 'users'));
     }
 
     /**

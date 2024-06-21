@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('hardware');
             $table->string('data_komunikasi');
             $table->string('user_id');
+            $table->string('other');
             $table->foreignId('surat_id')->constrained('surats')->onUpdate('cascade')->onDelete('restrict');
-
             $table->timestamps();
         });
     }

@@ -42,7 +42,7 @@ class Surat extends Model
 
     public function DOS()
     {
-        return $this->hasMany(DeskripsiOfService::class, 'surat_id');
+        return $this->hasMany(DescriptionOfService::class, 'surat_id');
     }
 
     public function status_peminjaman()

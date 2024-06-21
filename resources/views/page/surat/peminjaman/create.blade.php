@@ -28,8 +28,9 @@
 
         <a href="{{ route('surat-peminjaman.index') }}" class="mb-3 btn btn-outline-secondary">Kembali</a>
 
-        <form action="#" method="POST">
+        <form action="{{ route('surat-peminjaman-detail.store') }}" method="POST">
             @csrf
+            <input type="hidden" value="{{ $surat_peminjaman->id }}" name="surat">
             <!-- Informasi Umum Peminjaman Form -->
             <div class="row">
                 <div class="col-lg-12">
@@ -100,16 +101,53 @@
                             <h5 class="card-title mb-9 fw-semibold">Type of Services</h5>
                             <div class="row">
                                 <label for="software" class="form-label">Software</label>
-                                <div class="col-12 mb-3 d-flex flex-wrap">
-                                    @foreach (['SAP GUI', 'New / Modification Program/System', 'Authorization/TCode', 'PC standard Software'] as $software)
-                                        <div class="form-check me-4">
-                                            <input type="checkbox" class="form-check-input"
-                                                id="{{ str_replace(' ', '_', strtolower($software)) }}" name="software[]"
-                                                value="{{ $software }}">
-                                            <label class="form-check-label"
-                                                for="{{ str_replace(' ', '_', strtolower($software)) }}">{{ $software }}</label>
-                                        </div>
-                                    @endforeach
+                                <div class="col-12 mb-3 d-flex">
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="software1" name="software[]"
+                                            value="SAP GUI">
+                                        <label class="form-check-label" for="software1">SAP GUI</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="software2" name="software[]"
+                                            value="New / Modification Program/System">
+                                        <label class="form-check-label" for="software2">New / Modification
+                                            Program/System</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="software3" name="software[]"
+                                            value="Authorization/TCode">
+                                        <label class="form-check-label" for="software3">Authorization/TCode</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="software4" name="software[]"
+                                            value="PC standard Software">
+                                        <label class="form-check-label" for="software4">PC standard Software</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="hardware" class="form-label">Hardware</label>
+                                <div class="col-12 mb-3 d-flex">
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="hardware1" name="hardware[]"
+                                            value="Server">
+                                        <label class="form-check-label" for="hardware1">Server</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="hardware2" name="hardware[]"
+                                            value="PC">
+                                        <label class="form-check-label" for="hardware2">PC</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="hardware3" name="hardware[]"
+                                            value="Laptop">
+                                        <label class="form-check-label" for="hardware3">Laptop</label>
+                                    </div>
+                                    <div class="form-check me-4">
+                                        <input type="checkbox" class="form-check-input" id="hardware4" name="hardware[]"
+                                            value="Printer/Scanner">
+                                        <label class="form-check-label" for="hardware4">Printer/Scanner</label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-check me-4 mb-2">
@@ -117,38 +155,19 @@
                                     value="other">
                                 <label class="form-check-label" for="software_other">Other</label>
                             </div>
-                            <textarea class="form-control d-none mt-3" id="software_other_text" name="software_other_text" rows="2"
+                            <textarea class="form-control d-none mt-3" id="software_other_text" name="other" rows="2"
                                 placeholder="Please specify"></textarea>
-
-                            <div class="row">
-                                <label for="hardware" class="form-label">Hardware</label>
-                                <div class="col-12 mb-3 d-flex flex-wrap">
-                                    @foreach (['Server', 'PC', 'Laptop', 'Printer/Scanner'] as $hardware)
-                                        <div class="form-check me-4">
-                                            <input type="checkbox" class="form-check-input"
-                                                id="{{ str_replace(' ', '_', strtolower($hardware)) }}" name="hardware[]"
-                                                value="{{ $hardware }}">
-                                            <label class="form-check-label"
-                                                for="{{ str_replace(' ', '_', strtolower($hardware)) }}">{{ $hardware }}</label>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-
                             <div class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" id="data_komunikasi"
                                     name="data_komunikasi" value="data_komunikasi">
                                 <label class="form-check-label" for="data_komunikasi">Data Communication</label>
                             </div>
-
                             <div class="form-check mb-3">
-                                <input type="checkbox" class="form-check-input" id="phone" name="phone"
+                                <input type="checkbox" class="form-check-input" id="user_id" name="user_id"
                                     value="phone">
-                                <label class="form-check-label" for="phone">User ID - Lampirkan Form-124 permintaan
+                                <label class="form-check-label" for="user_id">User ID - Lampirkan Form-124 permintaan
                                     User ID -</label>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -201,7 +220,6 @@
                                 <div class="mb-3">
                                     <label for="it_recommendation" class="form-label">IT Recommendation</label>
                                     <div class="col d-flex ">
-
                                         <div class="form-check me-3 fs-3">
                                             <input
                                                 class="form-check-input @error('it_recommendation') is-invalid @enderror"
@@ -222,15 +240,24 @@
                                     <label for="reason" class="form-label">Reason</label>
                                     <textarea class="form-control @error('reason') is-invalid @enderror" id="reason" name="reason" required></textarea>
                                 </div>
-                                {{-- <div class="mb-3">
-                                    <label for="user_id" class="form-label">User</label>
-                                    <select class="form-select @error('user_id') is-invalid @enderror" id="user_id"
-                                        name="user_id" required>
+                                <div class="mb-3">
+                                    <label for="approved1" class="form-label">Approved By 1</label>
+                                    <select class="form-select @error('approved1') is-invalid @enderror" id="approved1"
+                                        name="approved1" required>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
-                                </div> --}}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="approve2" class="form-label">Approved By 2</label>
+                                    <select class="form-select @error('approve2') is-invalid @enderror" id="approve2"
+                                        name="approve2" required>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label for="assigned_to" class="form-label">Assigned To</label>
                                     <input type="date" class="form-control @error('assigned_to') is-invalid @enderror"
@@ -238,8 +265,21 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="priority" class="form-label">Priority</label>
-                                    <input type="number" class="form-control @error('priority') is-invalid @enderror"
-                                        id="priority" name="priority" min="1" max="5" required>
+                                    <div class="form-check me-3 mb-1">
+                                        <input class="form-check-input @error('priority') is-invalid @enderror"
+                                            type="radio" name="priority" id="priority1" value="1" required>
+                                        <label class="form-check-label" for="priority1">1</label>
+                                    </div>
+                                    <div class="form-check me-3 mb-1">
+                                        <input class="form-check-input @error('priority') is-invalid @enderror"
+                                            type="radio" name="priority" id="priority2" value="2" required>
+                                        <label class="form-check-label" for="priority2">2</label>
+                                    </div>
+                                    <div class="form-check me-3 mb-1">
+                                        <input class="form-check-input @error('priority') is-invalid @enderror"
+                                            type="radio" name="priority" id="priority3" value="3" required>
+                                        <label class="form-check-label" for="priority3">3</label>
+                                    </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="action" class="form-label">Action</label>
@@ -250,6 +290,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- Aksi Peminjaman Form -->
             <div class="row">
@@ -301,7 +342,6 @@
                     </div>
                 </div>
             </div>
-
         </form>
     </div>
 @endsection
