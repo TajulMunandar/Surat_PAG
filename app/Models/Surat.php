@@ -29,4 +29,29 @@ class Surat extends Model
     {
         return $this->hasMany(Uraian::class, 'surat_id');
     }
+
+    public function IUP()
+    {
+        return $this->hasMany(InformasiUmumPeminjaman::class, 'surat_id');
+    }
+
+    public function TOS()
+    {
+        return $this->hasMany(TypeOfService::class, 'surat_id');
+    }
+
+    public function DOS()
+    {
+        return $this->hasMany(DeskripsiOfService::class, 'surat_id');
+    }
+
+    public function status_peminjaman()
+    {
+        return $this->hasMany(StatusPeminjaman::class, 'surat_id');
+    }
+
+    public function aksi_peminjaman()
+    {
+        return $this->hasMany(AksiPeminjaman::class, 'surat_id');
+    }
 }

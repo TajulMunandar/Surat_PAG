@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Divisi;
 use App\Models\User;
 use App\Models\Surat;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class PeminjamanController extends Controller
         $title = "Surat Peminjaman";
         $breadcrumb = "Surat Peminjaman";
         $users = User::all();
-        $peminjamans = Surat::Where('jenis', 3)->with('users')->get();
+        $peminjamans = Surat::Where('jenis', 2)->with('users')->get();
         return view('page.surat.peminjaman.index')->with(compact('title', 'breadcrumb', 'users', 'peminjamans'));
     }
 
@@ -46,11 +47,12 @@ class PeminjamanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Surat $surat_magang)
+    public function show(Surat $surat_peminjaman)
     {
         $title = "Detail Surat Peminjaman";
         $breadcrumb = "Detail Surat Peminajaman";
-        return view('page.surat.peminjaman.create')->with(compact('surat_magang', 'title', 'breadcrumb'));
+        $divisis = Divisi::all();
+        return view('page.surat.peminjaman.create')->with(compact('surat_peminjaman', 'title', 'breadcrumb', 'divisis'));
     }
 
     /**

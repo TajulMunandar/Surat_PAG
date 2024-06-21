@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->hasMany(Surat::class, 'id');
     }
 
+    public function status_peminjaman()
+    {
+        return $this->hasMany(StatusPeminjaman::class, 'user_id');
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

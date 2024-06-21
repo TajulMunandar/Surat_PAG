@@ -170,7 +170,7 @@
                             </select>
                         </div>
                     </div>
-                    <input type="hidden" name="jenis" value="2">
+                    <input type="hidden" name="jenis" value="3">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add</button>

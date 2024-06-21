@@ -58,7 +58,7 @@
                                     <td>{{ $peminjaman->users->name }}</td>
                                     <td>
                                         <a class="btn btn-sm btn-info"
-                                            href="{{ route('surat-magang.show', $peminjaman->id) }}">
+                                            href="{{ route('surat-peminjaman.show', $peminjaman->id) }}">
                                             <i class="ti ti-eye"></i>
                                         </a>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
@@ -172,7 +172,7 @@
                             </select>
                         </div>
                     </div>
-                    <input type="hidden" name="jenis" value="3">
+                    <input type="hidden" name="jenis" value="2">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Add</button>
