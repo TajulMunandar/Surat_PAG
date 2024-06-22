@@ -20,7 +20,6 @@ class User extends Authenticatable
     protected $guarded = ['id'];
 
 
-
     public function divisi()
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');

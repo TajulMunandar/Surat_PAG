@@ -72,6 +72,7 @@
                                         </button>
                                     </td>
                                 </tr>
+
                                 {{-- Modal Edit --}}
                                 <div class="modal fade" id="editModal{{ $loop->iteration }}" tabindex="-1"
                                     aria-hidden="true">

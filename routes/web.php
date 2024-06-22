@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PeminjamanDetailController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -27,6 +28,10 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
+Route::get('/jsa', function () {
+    return view('template.jsa');
+});
+
 Route::controller(LoginController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'login');
@@ -35,6 +40,7 @@ Route::controller(LoginController::class)->group(function () {
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::prefix('/surat')->group(function () {
         Route::resource('/surat-jsa', JsaController::class);
@@ -45,6 +51,9 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::resource('/surat-peminjaman', PeminjamanController::class);
         Route::resource('/surat-peminjaman-detail', PeminjamanDetailController::class);
     });
+
+    Route::get('/my-profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/my-profile/reset-password', [ProfileController::class, 'update'])->name('profile.update');
 
 
     Route::resource('/user', UserController::class);

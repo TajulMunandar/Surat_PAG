@@ -66,7 +66,7 @@
                                 <label for="no_karyawan" class="form-label">No Karyawan</label>
                                 <input type="no_karyawan"
                                     class="form-control @error('no_karyawan') is-invalid @enderror" name="no_karyawan"
-                                    id="no_karyawan" placeholder="Enter your no_karyawan"
+                                    id="no_karyawan" placeholder="Enter your No Karyawan"
                                     value="{{ old('no_karyawan') }}" required autofocus>
                                 @error('no_karyawan')
                                     <div class="invalid-feedback">
