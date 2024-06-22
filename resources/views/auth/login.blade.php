@@ -53,8 +53,8 @@
                     <div class="card-body p-6">
                         <div class="mb-4">
                             <a href="#" class="d-flex justify-content-center">
-                                <img src="{{ asset('img/logo.png') }}" class="img-fluid mb-6" alt="Sport"
-                                    style="width: 60%">
+                                <img src="{{ asset('assets/images/logos/logo.png') }}" class="img-fluid mb-6"
+                                    alt="PAG" style="width: 40%">
                             </a>
                             <p class="mb-5">Please enter your user information.</p>
                         </div>
@@ -90,7 +90,7 @@
                             <div>
                                 <!-- Button -->
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" class="btn btn-info">Sign in</button>
                                 </div>
                         </form>
                     </div>

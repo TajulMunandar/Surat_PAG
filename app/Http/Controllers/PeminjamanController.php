@@ -21,10 +21,45 @@ class PeminjamanController extends Controller
     {
         $title = "Surat Peminjaman";
         $breadcrumb = "Surat Peminjaman";
-        $users = User::all();
-        $peminjamans = Surat::Where('jenis', 2)->with('users')->get();
-        return view('page.surat.peminjaman.index')->with(compact('title', 'breadcrumb', 'users', 'peminjamans'));
+
+        // Cek role pengguna yang sedang terautentikasi
+        if (auth()->user()->role == 1) { // Jika pengguna adalah Admin (role == 1)
+
+            // Mengambil semua pengguna dari tabel users
+            $users = User::all();
+
+            // Mengambil semua surat peminjaman (jenis == 1) bersama dengan relasi users
+            $peminjamans = Surat::Where('jenis', 1)->with('users')->get();
+        } elseif (auth()->user()->role == 2) { // Jika pengguna adalah Supervisor (role == 2)
+
+            // Mengambil semua pengguna yang berada dalam divisi yang sama dengan pengguna yang sedang terautentikasi
+            $users = User::Where('divisi_id', auth()->user()->divisi_id)->get();
+
+            // Mengambil surat peminjaman (jenis == 1) yang berhubungan dengan pengguna dalam divisi yang sama
+            $peminjamans = Surat::whereHas('users', function ($query) {
+                // Menggunakan whereHas untuk filter berdasarkan divisi_id pengguna
+                $query->where('divisi_id', auth()->user()->divisi_id);
+            })
+                ->where('jenis', 1) // Filter jenis surat peminjaman
+                ->with('users') // Mengambil relasi users
+                ->get();
+        } else { // Jika pengguna adalah Pengguna Biasa (role selain 1 atau 2)
+
+            // Mengambil pengguna yang sedang terautentikasi saja
+            $users = User::Where('id', auth()->user()->id)->get();
+
+            // Mengambil surat peminjaman (jenis == 1) yang dibuat oleh pengguna yang sedang terautentikasi
+            $peminjamans = Surat::Where('user_id', auth()->user()->id)
+                ->Where('jenis', 1) // Filter jenis surat peminjaman
+                ->with('users') // Mengambil relasi users
+                ->get();
+        }
+
+        // Mengembalikan view dengan data yang di-compact
+        return view('page.surat.peminjaman.index', compact('title', 'breadcrumb', 'users', 'peminjamans'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
