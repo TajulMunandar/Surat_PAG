@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('password');
-            $table->string('role');
+            $table->tinyInteger('role');
             $table->string('no_karyawan');
             $table->foreignId('divisi_id')->constrained('divisis')->onUpdate('cascade')->onDelete('restrict');
             $table->rememberToken();

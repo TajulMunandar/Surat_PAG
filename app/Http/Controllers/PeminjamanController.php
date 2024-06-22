@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AksiPeminjaman;
+use App\Models\DescriptionOfService;
 use App\Models\Divisi;
+use App\Models\InformasiUmumPeminjaman;
+use App\Models\StatusPeminjaman;
 use App\Models\User;
 use App\Models\Surat;
+use App\Models\TypeOfService;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -59,9 +64,29 @@ class PeminjamanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Surat $surat_peminjaman)
     {
-        //
+        $title = "Edit Detail Surat Peminjaman";
+        $breadcrumb = "Edit Detail Surat Peminajaman";
+        $divisis = Divisi::all();
+        $users = User::all();
+        $informasi = InformasiUmumPeminjaman::where('surat_id', $surat_peminjaman->id)->first();
+        $TOS = TypeOfService::where('surat_id', $surat_peminjaman->id)->get();
+        $DOS = DescriptionOfService::where('surat_id', $surat_peminjaman->id)->first();
+        $status_peminjaman = StatusPeminjaman::where('surat_id', $surat_peminjaman->id)->get();
+        $aksi_peminjaman = AksiPeminjaman::where('surat_id', $surat_peminjaman->id)->first();
+        return view('page.surat.peminjaman.edit')->with(compact(
+            'surat_peminjaman',
+            'title',
+            'breadcrumb',
+            'divisis',
+            'users',
+            'informasi',
+            'TOS',
+            'DOS',
+            'status_peminjaman',
+            'aksi_peminjaman'
+        ));
     }
 
     /**

@@ -18,8 +18,22 @@ class JsaController extends Controller
     {
         $title = "Surat JSA";
         $breadcrumb = "Surat JSA";
-        $users = User::all();
-        $jsas = Surat::Where('jenis', 1)->with('users')->get();
+        if (auth()->user()->role == 1) {
+            $users = User::all();
+            $jsas = Surat::Where('jenis', 1)->with('users')->get();
+        } elseif (auth()->user()->role == 2) {
+            $users = User::Where('divisi_id', auth()->user()->divisi_id)->get();
+            $jsas = Surat::whereHas('users', function ($query) {
+                $query->where('divisi_id', auth()->user()->divisi_id);
+            })
+                ->where('jenis', 1)
+                ->with('users')
+                ->get();
+        } else {
+            $users = User::Where('id', auth()->user()->id)->get();
+            $jsas = Surat::Where('user_id', auth()->user()->id)->Where('jenis', 1)->with('users')->get();
+        }
+
         return view('page.surat.jsa.index')->with(compact('title', 'breadcrumb', 'users', 'jsas'));
     }
 

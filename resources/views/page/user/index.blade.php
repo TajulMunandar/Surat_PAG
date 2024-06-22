@@ -45,7 +45,15 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->no_karyawan }}</td>
-                                    <td>{{ $user->role }}</td>
+                                    <td>
+                                        @if ($user->role === 1)
+                                            <span class="badge p-2 bg-black">Super Admin</span>
+                                        @elseif ($user->role === 2)
+                                            <span class="badge p-2 bg-secondary">Admin</span>
+                                        @else
+                                            <span class="badge p-2 bg-info">Karyawan</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $user->divisi->nama_divisi }}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
@@ -95,16 +103,16 @@
                                                         <label for="edit_role" class="form-label">Role</label>
                                                         <select class="form-control @error('role') is-invalid @enderror"
                                                             name="role" id="edit_role" required>
-                                                            <option value="superadmin"
-                                                                {{ old('role', $user->role) == 'superadmin' ? 'selected' : '' }}>
+                                                            <option value="1"
+                                                                {{ old('role', $user->role) == '1' ? 'selected' : '' }}>
                                                                 Superadmin
                                                             </option>
-                                                            <option value="admin"
-                                                                {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>
+                                                            <option value="2"
+                                                                {{ old('role', $user->role) == '2' ? 'selected' : '' }}>
                                                                 Admin
                                                             </option>
-                                                            <option value="karyawan"
-                                                                {{ old('role', $user->role) == 'karyawan' ? 'selected' : '' }}>
+                                                            <option value="3"
+                                                                {{ old('role', $user->role) == '3' ? 'selected' : '' }}>
                                                                 Karyawan
                                                             </option>
                                                         </select>
@@ -288,10 +296,10 @@
                             <label for="role" class="form-label">Role</label>
                             <select class="form-select @error('role') is-invalid @enderror" name="role" id="role"
                                 required>
-                                <option value="superadmin" {{ old('role') == 'superadmin' ? 'selected' : '' }}>Superadmin
+                                <option value="1" {{ old('role') == '1' ? 'selected' : '' }}>Superadmin
                                 </option>
-                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="karyawan" {{ old('role') == 'karyawan' ? 'selected' : '' }}>Karyawan
+                                <option value="2" {{ old('role') == '2' ? 'selected' : '' }}>Admin</option>
+                                <option value="3" {{ old('role') == '3' ? 'selected' : '' }}>Karyawan
                                 </option>
                             </select>
                             @error('role')

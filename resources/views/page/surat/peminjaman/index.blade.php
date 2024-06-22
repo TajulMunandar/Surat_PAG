@@ -57,10 +57,22 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $peminjaman->users->name }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-info"
-                                            href="{{ route('surat-peminjaman.show', $peminjaman->id) }}">
-                                            <i class="ti ti-eye"></i>
-                                        </a>
+                                        @if (
+                                            $peminjaman->IUP->isNotEmpty() &&
+                                                $peminjaman->DOS->isNotEmpty() &&
+                                                $peminjaman->TOS->isNotEmpty() &&
+                                                $peminjaman->status_peminjaman->isNotEmpty() &&
+                                                $peminjaman->aksi_peminjaman->isNotEmpty())
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('surat-peminjaman.edit', $peminjaman->id) }}">
+                                                <i class="ti ti-eye"></i> Edit
+                                            </a>
+                                        @else
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('surat-peminjaman.show', $peminjaman->id) }}">
+                                                <i class="ti ti-eye"></i> Show
+                                            </a>
+                                        @endif
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $loop->iteration }}">
                                             <i class="ti ti-edit"></i>

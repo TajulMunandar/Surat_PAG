@@ -36,28 +36,30 @@
                           <span class="hide-menu">Surat</span>
                       </a>
                   </li>
-                  <li class="nav-small-cap">
-                      <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                      <span class="hide-menu">DATA MASTER</span>
-                  </li>
-                  <li class="sidebar-item">
-                      <a class="sidebar-link {{ Request::is('dashboard/divisi*') ? 'active' : '' }}"
-                          href="{{ route('divisi.index') }}" aria-expanded="false">
-                          <span>
-                              <i class="ti ti-building"></i>
-                          </span>
-                          <span class="hide-menu">Divisi</span>
-                      </a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a class="sidebar-link {{ Request::is('dashboard/user*') ? 'active' : '' }}"
-                          href="{{ route('user.index') }}" aria-expanded="false">
-                          <span>
-                              <i class="ti ti-user-plus"></i>
-                          </span>
-                          <span class="hide-menu">User</span>
-                      </a>
-                  </li>
+                  @if (auth()->user()->role == 1)
+                      <li class="nav-small-cap">
+                          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                          <span class="hide-menu">DATA MASTER</span>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link {{ Request::is('dashboard/divisi*') ? 'active' : '' }}"
+                              href="{{ route('divisi.index') }}" aria-expanded="false">
+                              <span>
+                                  <i class="ti ti-building"></i>
+                              </span>
+                              <span class="hide-menu">Divisi</span>
+                          </a>
+                      </li>
+                      <li class="sidebar-item">
+                          <a class="sidebar-link {{ Request::is('dashboard/user*') ? 'active' : '' }}"
+                              href="{{ route('user.index') }}" aria-expanded="false">
+                              <span>
+                                  <i class="ti ti-user-plus"></i>
+                              </span>
+                              <span class="hide-menu">User</span>
+                          </a>
+                      </li>
+                  @endif
               </ul>
           </nav>
 

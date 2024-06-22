@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('type_of_services', function (Blueprint $table) {
             $table->id();
-            $table->string('software');
-            $table->string('hardware');
-            $table->string('data_komunikasi');
-            $table->string('user_id');
-            $table->string('other');
+            $table->string('software')->nullable();
+            $table->string('hardware')->nullable();
+            $table->string('data_komunikasi')->nullable();
+            $table->string('user_id')->nullable();
             $table->foreignId('surat_id')->constrained('surats')->onUpdate('cascade')->onDelete('restrict');
             $table->timestamps();
         });

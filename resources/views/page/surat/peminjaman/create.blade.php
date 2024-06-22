@@ -151,11 +151,10 @@
                                 </div>
                             </div>
                             <div class="form-check me-4 mb-2">
-                                <input type="checkbox" class="form-check-input" id="software_other" name="software[]"
-                                    value="other">
+                                <input type="checkbox" class="form-check-input" id="software_other">
                                 <label class="form-check-label" for="software_other">Other</label>
                             </div>
-                            <textarea class="form-control d-none mt-3" id="software_other_text" name="other" rows="2"
+                            <textarea class="form-control d-none mt-3" id="software_other_text" name="hardware[]" rows="2"
                                 placeholder="Please specify"></textarea>
                             <div class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" id="data_komunikasi"
