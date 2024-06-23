@@ -163,7 +163,7 @@
                             </div>
                             <div class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" id="user_id" name="user_id"
-                                    value="phone">
+                                    value="user_id">
                                 <label class="form-check-label" for="user_id">User ID - Lampirkan Form-124 permintaan
                                     User ID -</label>
                             </div>

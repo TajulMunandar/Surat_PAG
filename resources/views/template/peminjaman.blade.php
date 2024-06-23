@@ -161,7 +161,7 @@
                         <td colspan="3">
                             <div class="form-check" style="position: relative;">
                                 <input class="form-check-input" type="checkbox" style="position: absolute"
-                                    {{ $TOS->contains('software', 'Authorization/Tcode') ? 'checked' : '' }}>
+                                    {{ $TOS->contains('software', 'Authorization/TCode') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">Authorization/Tcode</label>
                             </div>
                         </td>
@@ -171,17 +171,25 @@
                         <td colspan="3">
                             <div class="form-check" style="position: relative;">
                                 <input class="form-check-input" type="checkbox" style="position: absolute"
-                                    {{ $TOS->contains('software', 'PC Standard Software') ? 'checked' : '' }}>
+                                    {{ $TOS->contains('software', 'PC standard Software') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">PC Standard Software</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 5%"></td>
+                        @php
+                            $other_hardware = $TOS->pluck('hardware')->filter(function ($item) {
+                                return !in_array($item, ['Server', 'PC', 'Laptop', 'Printer/Scanner', null]);
+                            });
+                        @endphp
                         <td>
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
-                                <label style="margin-left: 20px">Other</label><br> <span>___</span>
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $other_hardware->isNotEmpty() ? 'checked' : '' }}>
+                                <label style="margin-left: 20px">Other</label><br>
+                                <span
+                                    style="border-bottom: 1px solid">{{ $other_hardware->isNotEmpty() ? $other_hardware->first() : '' }}</span>
                             </div>
                         </td>
                     </tr>
@@ -191,25 +199,29 @@
                     <tr>
                         <td style="width: 30%">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('hardware', 'Server') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">Server</label>
                             </div>
                         </td>
                         <td style="width: 30%">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('hardware', 'PC') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">PC</label>
                             </div>
                         </td>
                         <td style="width: 10%">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('hardware', 'Laptop') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px; margin-right: 30px">Laptop</label>
                             </div>
                         </td>
                         <td style="width: 30%">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('hardware', 'Printer/Scanner') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">Printer/Scanner</label>
                             </div>
                         </td>
@@ -217,7 +229,8 @@
                     <tr>
                         <td colspan="2">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('data_komunikasi', 'data_komunikasi') ? 'checked' : '' }}>
                                 <label style="margin-left: 20px">Data Komunikasi</label>
                             </div>
                         </td>
@@ -226,7 +239,8 @@
                         <td></td>
                         <td colspan="5">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('user_id', 'user_id') ? 'checked' : '' }}>
                                 <label class="form-check-label" style="margin-left: 20px">User ID - Lampirkan Form-124
                                     Permintaan User ID</label>
                             </div>
@@ -242,19 +256,14 @@
                         <td style="vertical-align: top; max-width: 100%; text-align: justify;">
                             <span style="font-weight: 600;">Description
                                 Of Services :</span> <span
-                                style="border-bottom: 1px solid black; line-height: 20px">Lorem
-                                ipsum dolor sit
-                                amet consectetur adipisicing elit. Tempora
-                                eos
-                                voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi omnis recusandae vel
-                                suscipit
-                                mollitia unde explicabo animi! lorem21</span>
+                                style="border-bottom: 1px solid black; line-height: 20px">{{ $DOS->deskripsi }}</span>
                             <span style="font: 600; position: relative;">
-                                <input type="checkbox" style="position: absolute;">
+                                <input type="checkbox" style="position: absolute;"
+                                    {{ $DOS->attachment ? 'checked' : '' }}>
                                 <label style="margin-left: 15px" class="form-check-label"
                                     for="flexCheckDefault">Attachment</label>
                             </span>
-                            <span style="border-bottom: 1px solid black;">__</span>
+                            <span style="">__</span>
                             <span>Page</span>
                         </td>
 
@@ -267,12 +276,7 @@
                 <tbody>
                     <td style="vertical-align: top; max-width: 100%; text-align: justify; line-height: 20px">
                         <span style="font-weight: 600;">JUSTIFICATION :</span> <span
-                            style="border-bottom: 1px solid black;">Lorem ipsum dolor sit
-                            amet consectetur adipisicing elit. Tempora
-                            eos
-                            voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi omnis recusandae vel
-                            suscipit
-                            mollitia unde explicabo animi! lorem21</span>
+                            style="border-bottom: 1px solid black;">{{ $DOS->justification }}</span>
                     </td>
                     <tr style="height: 50px;"></tr>
                 </tbody>
@@ -284,15 +288,15 @@
                     <tr>
                         <th style="width: 30%; vertical-align: top; text-align: center;">
                             <span style="font-weight: 600">Request By / Date</span>
-                            <span style="font-weight: 600a">dsasd</span>
+                            <span style="font-weight: 600a">{{ $status_peminjaman->request_by }}</span>
                         </th>
                         <th style="width: 50%; text-align: center; vertical-align: top;">
                             <span style="font-weight: 600">Dept / fungsi</span><br>
-                            <span style="font-weight: 600a">dsasd</span>
+                            <span style="font-weight: 600a">{{ $status_peminjaman->fungsi }}</span>
                         </th>
                         <th style="width: 50%; text-align: center; vertical-align: top;">
                             <span style="font-weight: 600">Approve by supv/Asman/Manager</span>
-                            <span style="font-weight: 600 a">dsasd</span>
+                            <span style="font-weight: 600 a">{{ $approved1->name }}</span>
                         </th>
                     </tr>
                 </thead>
@@ -308,29 +312,23 @@
                     <tr style="margin-left: 40px">
                         <td style="width: 25% padding: 5px; vertical-align: top;">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute;">
-                                <label style="margin-left: 20px;">Server</label>
+                                <input class="form-check-input" type="checkbox" style="position: absolute;"
+                                    {{ $status_peminjaman->it_recommendation == 'accepted' ? 'checked' : '' }}>
+                                <label style="margin-left: 20px;">Accepted</label>
                             </div>
                         </td>
                         <td style="width: 25% padding: 5px; vertical-align: top;">
                             <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute;">
-                                <label style="margin-left: 20px;">PC</label>
-                            </div>
-                        </td>
-                        <td style="width: 25% padding: 5px; vertical-align: top">
-                            <div class="form-check" style="position: relative;">
-                                <input class="form-check-input" type="checkbox" style="position: absolute;">
-                                <label style="margin-left: 20px; ">Laptop</label>
+                                <input class="form-check-input" type="checkbox" style="position: absolute;"
+                                    {{ $status_peminjaman->it_recommendation == 'not_accepted' ? 'checked' : '' }}>
+                                <label style="margin-left: 20px;">Not Accepted</label>
                             </div>
                         </td>
                         <td
                             style="vertical-align: top;width: 50%; max-width: 40%; padding-right: 15%; text-align: justify;">
                             <span style="font-weight: 600; margin-top: 20px; ">Reason :</span>
-                            <span style="border-bottom: 1px solid black; width: 30%; ">Lorem ipsum dolor sit
-                                amet consectetur adipisicing elit. Tempora
-                                eos
-                                voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi
+                            <span
+                                style="border-bottom: 1px solid black; width: 30%; ">{{ $status_peminjaman->reason }}
                             </span>
                         </td>
                     </tr>
@@ -342,11 +340,11 @@
                         <tr>
                             <th style="width: 30%; vertical-align: top; text-align: center;">
                                 <span style="font-weight: 600;">Assigned by / Date</span><br>
-                                <span style="font-weight: 600;">dsasd</span>
+                                <span style="font-weight: 600;">{{ $status_peminjaman->assigned_to }}</span>
                             </th>
                             <th style="width: 40%; text-align: center; vertical-align: top;">
                                 <span style="font-weight: 600;">Approve by supv/Asman/Manager</span><br>
-                                <span style="font-weight: 600;">dsasd</span>
+                                <span style="font-weight: 600;">{{ $approve2->name }}</span>
                             </th>
                             <th style="width: 30%; text-align: center; vertical-align: top;">
                                 <div style="display: flex; align-items: center;">
@@ -355,19 +353,22 @@
                                         <tr style="border: none;">
                                             <td style="border: none; width: 33%; position: relative">
                                                 <input class="form-check-input" style="position: absolute"
-                                                    type="checkbox" id="priority1">
+                                                    type="checkbox" id="priority1"
+                                                    {{ $status_peminjaman->priority == '1' ? 'checked' : '' }}>
                                                 <label class="form-check-label" style="margin-left: 30px"
                                                     for="priority1">1</label>
                                             </td>
                                             <td style="border: none; width: 33%; position: relative">
                                                 <input class="form-check-input" type="checkbox" id="priority2"
-                                                    style="position: absolute">
+                                                    style="position: absolute"
+                                                    {{ $status_peminjaman->priority == '2' ? 'checked' : '' }}>
                                                 <label class="form-check-label" for="priority2"
                                                     style="margin-left: 30px">2</label>
                                             </td>
                                             <td style="border: none; width: 33%; position: relative">
                                                 <input class="form-check-input" type="checkbox" id="priority3"
-                                                    style="position: absolute">
+                                                    style="position: absolute"
+                                                    {{ $status_peminjaman->priority == '3' ? 'checked' : '' }}>
                                                 <label class="form-check-label"
                                                     for="priority3"style="margin-left: 30px">3</label>
                                             </td>
@@ -385,14 +386,7 @@
                         <tr>
                             <td style="vertical-align: top; max-width: 100%; text-align: justify;">
                                 <span style="font-weight: 600;">Action :</span> <span
-                                    style="border-bottom: 1px solid black; line-height: 20px">Lorem
-                                    ipsum dolor sit
-                                    amet consectetur adipisicing elit. Tempora
-                                    eos
-                                    voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi omnis recusandae
-                                    vel
-                                    suscipit
-                                    mollitia unde explicabo animi! lorem21</span>
+                                    style="border-bottom: 1px solid black; line-height: 20px">{{ $status_peminjaman->action }}</span>
                             </td>
                         </tr>
                     </tbody>
@@ -406,14 +400,14 @@
                             <td style="vertical-align: top; text-align: justify; width: 32%; padding-right: 10%;">
                                 <span style="font-weight: 600; margin-right: 70px">Estimated Work</span> :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asdas</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->estimasi_kerja }}</span>
                             </td>
                             <td style="vertical-align: top; width: 32%; padding-right: 10%;">
-                                <span style="font-weight: 600; margin-right: 30px; font-size: 12px">Est Expenseve
-                                    Amounds(US$)</span>
+                                <span style="font-weight: 600; margin-right: 50px; font-size: 12px">Est Expense
+                                    Amount(US$)</span>
                                 :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asda</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->expense_amount }}</span>
                             </td>
                         </tr>
                     </thead>
@@ -422,24 +416,24 @@
                             <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                                 <span style="font-weight: 600; margin-right: 113px">Start Date</span> :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->tanggal_mulai }}</span>
                             </td>
                             <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                                 <span style="font-weight: 600; margin-right: 70px">Completion Date</span> :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->completion_date }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                                 <span style="font-weight: 600; margin-right: 88px">Completed by</span> :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->completed_by }}</span>
                             </td>
                             <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                                 <span style="font-weight: 600; margin-right: 73px">User Acceptance</span> :
                                 <span
-                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $aksi->user_acceptance }}</span>
                             </td>
                         </tr>
                     </tbody>

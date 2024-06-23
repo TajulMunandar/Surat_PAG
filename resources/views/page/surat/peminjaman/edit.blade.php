@@ -157,7 +157,7 @@
                             </div>
                             <div class="form-check mb-3">
                                 <input type="checkbox" class="form-check-input" id="user_id" name="user_id"
-                                    value="phone" {{ $TOS->where('user_id')->isNotEmpty() ? 'checked' : '' }}>
+                                    value="user_id" {{ $TOS->where('user_id')->isNotEmpty() ? 'checked' : '' }}>
                                 <label class="form-check-label" for="user_id">User Id</label>
                             </div>
                         </div>

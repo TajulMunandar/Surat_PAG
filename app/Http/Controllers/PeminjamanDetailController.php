@@ -89,6 +89,12 @@ class PeminjamanDetailController extends Controller
                 ]);
             }
 
+            TypeOfService::create([
+                'data_komunikasi' => $validatedData['data_komunikasi'],
+                'user_id' => $validatedData['user_id'],
+                'surat_id' => $request->surat,
+            ]);
+
 
             // Simpan description of service
             DescriptionOfService::create($validatedData);
@@ -172,9 +178,6 @@ class PeminjamanDetailController extends Controller
             $informasi->update($validatedData);
 
 
-
-
-
             $TOS = TypeOfService::where('surat_id', $surat_peminjaman_detail->id)->get();
 
             // Hardware yang ada di database
@@ -208,6 +211,20 @@ class PeminjamanDetailController extends Controller
                         ['software' => $software]
                     );
                 }
+            };
+
+            if (isset($validatedData['data_komunikasi'])) {
+                TypeOfService::updateOrCreate(
+                    ['data_komunikasi' => $validatedData['data_komunikasi'], 'surat_id' => $surat_peminjaman_detail->id],
+                    ['data_komunikasi' => $validatedData['data_komunikasi']]
+                );
+            };
+
+            if (isset($validatedData['data_komunikasi'])) {
+                TypeOfService::updateOrCreate(
+                    ['user_id' => $validatedData['user_id'], 'surat_id' => $surat_peminjaman_detail->id],
+                    ['user_id' => $validatedData['user_id']]
+                );
             };
 
             // Update description of service

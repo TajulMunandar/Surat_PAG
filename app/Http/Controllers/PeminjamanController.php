@@ -31,7 +31,7 @@ class PeminjamanController extends Controller
             $users = User::all();
 
             // Mengambil semua surat peminjaman (jenis == 1) bersama dengan relasi users
-            $peminjamans = Surat::Where('jenis', 1)->with('users')->get();
+            $peminjamans = Surat::Where('jenis', 2)->with('users')->get();
         } elseif (auth()->user()->role == 2) { // Jika pengguna adalah Supervisor (role == 2)
 
             // Mengambil semua pengguna yang berada dalam divisi yang sama dengan pengguna yang sedang terautentikasi
@@ -42,7 +42,7 @@ class PeminjamanController extends Controller
                 // Menggunakan whereHas untuk filter berdasarkan divisi_id pengguna
                 $query->where('divisi_id', auth()->user()->divisi_id);
             })
-                ->where('jenis', 1) // Filter jenis surat peminjaman
+                ->where('jenis', 2) // Filter jenis surat peminjaman
                 ->with('users') // Mengambil relasi users
                 ->get();
         } else { // Jika pengguna adalah Pengguna Biasa (role selain 1 atau 2)
@@ -52,7 +52,7 @@ class PeminjamanController extends Controller
 
             // Mengambil surat peminjaman (jenis == 1) yang dibuat oleh pengguna yang sedang terautentikasi
             $peminjamans = Surat::Where('user_id', auth()->user()->id)
-                ->Where('jenis', 1) // Filter jenis surat peminjaman
+                ->Where('jenis', 2) // Filter jenis surat peminjaman
                 ->with('users') // Mengambil relasi users
                 ->get();
         }
@@ -154,6 +154,30 @@ class PeminjamanController extends Controller
 
             $peminjaman = Surat::findOrFail($id);
 
+
+            // Menghapus relasi AlatPelindung
+            $peminjaman->IUP->each(function ($IUP) {
+                $IUP->delete();
+            });
+
+            // Menghapus relasi InformasiUmum
+            $peminjaman->TOS->each(function ($TOS) {
+                $TOS->delete();
+            });
+
+            // Menghapus relasi Uraian
+            $peminjaman->DOS->each(function ($DOS) {
+                $DOS->delete();
+            });
+
+            $peminjaman->status_peminjaman->each(function ($status_peminjaman) {
+                $status_peminjaman->delete();
+            });
+
+            $peminjaman->aksi_peminjaman->each(function ($aksi_peminjaman) {
+                $aksi_peminjaman->delete();
+            });
+
             $peminjaman->delete();
 
             return redirect('/dashboard/surat/surat-peminjaman')->with('success', 'Surat berhasil dihapus!');
@@ -165,10 +189,12 @@ class PeminjamanController extends Controller
     public function generatePDF(Surat $surat_peminjaman)
     {
         $informasi = InformasiUmumPeminjaman::with('divisi')->where('surat_id', $surat_peminjaman->id)->first();
-        $DOS = DescriptionOfService::where('surat_id', $surat_peminjaman->id)->get();
+        $DOS = DescriptionOfService::where('surat_id', $surat_peminjaman->id)->first();
         $TOS = TypeOfService::where('surat_id', $surat_peminjaman->id)->get();
-        $status_peminjaman = StatusPeminjaman::where('surat_id', $surat_peminjaman->id)->get();
-        $aksi = AksiPeminjaman::where('surat_id', $surat_peminjaman->id)->get();
+        $status_peminjaman = StatusPeminjaman::where('surat_id', $surat_peminjaman->id)->first();
+        $approved1 = User::where('id', $status_peminjaman->approved1)->first();
+        $approve2 = User::where('id', $status_peminjaman->approve2)->first();
+        $aksi = AksiPeminjaman::where('surat_id', $surat_peminjaman->id)->first();
 
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
@@ -177,7 +203,7 @@ class PeminjamanController extends Controller
         $pdf = new Dompdf($options);
 
         // Menggabungkan semua data yang akan dikirim ke view menggunakan compact
-        $htmlContent = view('template.peminjaman', compact('surat_peminjaman', 'informasi', 'DOS', 'TOS', 'status_peminjaman', 'aksi'))->render();
+        $htmlContent = view('template.peminjaman', compact('surat_peminjaman', 'informasi', 'DOS', 'TOS', 'status_peminjaman', 'aksi', 'approved1', 'approve2'))->render();
         $pdf->loadHtml($htmlContent);
         $pdf->setPaper('legal', 'portrait');
 
