@@ -7,6 +7,8 @@ use App\Models\InformasiUmum;
 use App\Models\User;
 use App\Models\Surat;
 use App\Models\Uraian;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 
 class JsaController extends Controller
@@ -134,5 +136,24 @@ class JsaController extends Controller
         }
     }
 
-    // p
+    public function generatePDF(Surat $surat_jsa)
+    {
+        $informasi = InformasiUmum::where('surat_id', $surat_jsa->id)->first();
+        $alat = AlatPelindung::where('surat_id', $surat_jsa->id)->get();
+        $uraians = Uraian::where('surat_id', $surat_jsa->id)->get();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $pdf = new Dompdf($options);
+
+        $htmlContent = view('template.jsa', compact('surat_jsa', 'informasi', 'alat', 'uraians'))->render();
+        $pdf->loadHtml($htmlContent);
+        $pdf->setPaper('legal', 'landscape');
+
+        $pdf->render();
+
+        // Parameter 'false' untuk menampilkan PDF di browser tanpa memaksa unduhan
+        return $pdf->stream('Jsa.pdf');
+    }
 }

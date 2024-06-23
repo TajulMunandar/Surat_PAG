@@ -57,6 +57,12 @@
                                     <td>{{ $jsa->users->name }}</td>
                                     <td>
                                         @if ($jsa->informasi_umum->isNotEmpty() && $jsa->alat_pelindung->isNotEmpty() && $jsa->uraian->isNotEmpty())
+                                            <a href="{{ route('jsa.pdf', ['surat_jsa' => $jsa->id]) }}"
+                                                class="btn btn-sm btn-success">
+                                                <i class="ti ti-file"></i>
+                                            </a>
+                                        @endif
+                                        @if ($jsa->informasi_umum->isNotEmpty() && $jsa->alat_pelindung->isNotEmpty() && $jsa->uraian->isNotEmpty())
                                             <a class="btn btn-sm btn-info" href="{{ route('surat-jsa.edit', $jsa->id) }}">
                                                 <i class="ti ti-eye"></i> Edit
                                             </a>
@@ -65,6 +71,7 @@
                                                 <i class="ti ti-eye"></i> Show
                                             </a>
                                         @endif
+
 
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $loop->iteration }}">

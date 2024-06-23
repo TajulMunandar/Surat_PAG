@@ -45,6 +45,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::prefix('/surat')->group(function () {
         Route::resource('/surat-jsa', JsaController::class);
         Route::resource('/surat-jsa-detail', JsaDetailController::class);
+        Route::get('surat-jsa/{surat_jsa}/generate-pdf', [JsaController::class, 'generatePDF'])->name('jsa.pdf');
 
         Route::resource('/surat-magang', MagangController::class);
 
