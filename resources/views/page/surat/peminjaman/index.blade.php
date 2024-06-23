@@ -63,6 +63,17 @@
                                                 $peminjaman->TOS->isNotEmpty() &&
                                                 $peminjaman->status_peminjaman->isNotEmpty() &&
                                                 $peminjaman->aksi_peminjaman->isNotEmpty())
+                                            <a href="{{ route('peminjaman.pdf', ['surat_peminjaman' => $peminjaman->id]) }}"
+                                                class="btn btn-sm btn-success">
+                                                <i class="ti ti-file"></i>
+                                            </a>
+                                        @endif
+                                        @if (
+                                            $peminjaman->IUP->isNotEmpty() &&
+                                                $peminjaman->DOS->isNotEmpty() &&
+                                                $peminjaman->TOS->isNotEmpty() &&
+                                                $peminjaman->status_peminjaman->isNotEmpty() &&
+                                                $peminjaman->aksi_peminjaman->isNotEmpty())
                                             <a class="btn btn-sm btn-info"
                                                 href="{{ route('surat-peminjaman.edit', $peminjaman->id) }}">
                                                 <i class="ti ti-eye"></i> Edit

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AksiPeminjaman;
-use App\Models\DescriptionOfService;
-use App\Models\Divisi;
-use App\Models\InformasiUmumPeminjaman;
-use App\Models\StatusPeminjaman;
 use App\Models\User;
 use App\Models\Surat;
-use App\Models\TypeOfService;
+use App\Models\Divisi;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
+use App\Models\TypeOfService;
+use App\Models\AksiPeminjaman;
+use App\Models\StatusPeminjaman;
+use App\Models\DescriptionOfService;
+use App\Models\InformasiUmumPeminjaman;
 
 class PeminjamanController extends Controller
 {
@@ -158,5 +160,26 @@ class PeminjamanController extends Controller
         } catch (\Exception $exception) {
             return redirect()->route('surat-peminjaman.index')->with('failed', 'Data gagal dihapus! ' . $exception->getMessage());
         }
+    }
+
+    public function generatePDF(Surat $surat_peminjaman)
+    {
+        // $informasi = InformasiUmum::where('surat_id', $surat_jsa->id)->first();
+        // $alat = AlatPelindung::where('surat_id', $surat_jsa->id)->get();
+        // $uraians = Uraian::where('surat_id', $surat_jsa->id)->get();
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+
+        $pdf = new Dompdf($options);
+
+        $htmlContent = view('template.peminjaman', compact('surat_peminjaman'))->render();
+        $pdf->loadHtml($htmlContent);
+        $pdf->setPaper('legal', 'potrait');
+
+        $pdf->render();
+
+        // Parameter 'false' untuk menampilkan PDF di browser tanpa memaksa unduhan
+        return $pdf->stream('peminajamn.pdf', ['Attachment' => false]);
     }
 }

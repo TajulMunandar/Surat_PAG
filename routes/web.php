@@ -28,8 +28,8 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
-Route::get('/jsa', function () {
-    return view('template.jsa');
+Route::get('/peminjaman', function () {
+    return view('template.peminjaman');
 });
 
 Route::controller(LoginController::class)->group(function () {
@@ -51,6 +51,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
         Route::resource('/surat-peminjaman', PeminjamanController::class);
         Route::resource('/surat-peminjaman-detail', PeminjamanDetailController::class);
+        Route::get('surat-peminjaman/{surat_peminjaman}/generate-pdf', [PeminjamanController::class, 'generatePDF'])->name('peminjaman.pdf');
     });
 
     Route::get('/my-profile', [ProfileController::class, 'index'])->name('profile');
