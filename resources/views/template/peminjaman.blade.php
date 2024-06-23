@@ -68,118 +68,120 @@
                 <thead style="margin-bottom: 0;">
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 32%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 118px">Nama Pemakai</span> :
+                            <span style="font-weight: 600; margin-right: 90px">Nama Pemakai</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asdas</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->nama_pemakai }}</span>
                         </td>
                         <td style="vertical-align: top; width: 32%; padding-right: 10%;">
                             <span style="font-weight: 600; margin-right: 115px">Nama Divisi</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asda</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->divisi->nama_divisi }}</span>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 143px">No Pegawai</span> :
+                            <span style="font-weight: 600; margin-right: 115px">No Pegawai</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->no_pegawai }}</span>
                         </td>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                             <span style="font-weight: 600; margin-right: 125px">Unit Kerja</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->unit_kerja }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 127px">Tempat Lahir</span> :
+                            <span style="font-weight: 600; margin-right: 100px">Tempat Lahir</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->tempat_lahir }}</span>
                         </td>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
                             <span style="font-weight: 600; margin-right: 113px">No Telphone</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->no_telpon }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 125px">Tanggal Lahir</span> :
+                            <span style="font-weight: 600; margin-right: 100px">Tanggal Lahir</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->tanggal_lahir }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 117px">Tanggal Masuk</span> :
+                            <span style="font-weight: 600; margin-right: 93px">Tanggal Masuk</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->tanggal_masuk }}</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
-                            <span style="font-weight: 600; margin-right: 170px">Jabatan</span> :
+                            <span style="font-weight: 600; margin-right: 140px">Jabatan</span> :
                             <span
-                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                                style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">{{ $informasi->jabatan }}</span>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div style="margin-top: 20px; margin-left: 40px">
-            <table border style="width: 100%">
+            <table style="width: 100%">
                 <tbody>
                     <tr>
-                        <td style="vertical-align: top; width: 50%" rowspan="10">TYPE OF SERVICE</td>
+                        <td style="vertical-align: top; width: 50%;" rowspan="10">TYPE OF SERVICE</td>
                         <td colspan="2">Software / application</td>
                     </tr>
                     <tr style="height: 50px;"></tr>
                     <tr style="padding-top: 50px;">
-                        <td>
-                        </td>
-                        <td style="width: 50% ">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">SAP GUI</label>
+                        <td></td>
+                        <td style="width: 50%">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('software', 'SAP GUI') ? 'checked' : '' }}>
+                                <label style="margin-left: 20px">SAP GUI</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 5%"></td>
                         <td colspan="3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">New / Modification
-                                    Program/System</label>
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('software', 'New / Modification Program/System') ? 'checked' : '' }}>
+                                <label style="margin-left: 20px">New / Modification Program/System</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%"></td>
+                        <td colspan="3">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('software', 'Authorization/Tcode') ? 'checked' : '' }}>
+                                <label style="margin-left: 20px">Authorization/Tcode</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 5%"></td>
+                        <td colspan="3">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute"
+                                    {{ $TOS->contains('software', 'PC Standard Software') ? 'checked' : '' }}>
+                                <label style="margin-left: 20px">PC Standard Software</label>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 5%"></td>
                         <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">Authorization/Tcode</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 5%"></td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">PC Standard</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width: 5%"></td>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">Other</label>
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <label style="margin-left: 20px">Other</label><br> <span>___</span>
                             </div>
                         </td>
                     </tr>
@@ -187,41 +189,36 @@
                         <td colspan="4">Hardware</td>
                     </tr>
                     <tr>
-                        <td style="width: 5% padding-right: px;"></td>
-                        <td style="">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                <label class="form-check-label" for="flexCheckDefault1">Server</label>
+                        <td style="width: 30%">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <label style="margin-left: 20px">Server</label>
                             </div>
                         </td>
                         <td style="width: 30%">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault2">
-                                <label class="form-check-label" for="flexCheckDefault2">PC</label>
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <label style="margin-left: 20px">PC</label>
+                            </div>
+                        </td>
+                        <td style="width: 10%">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <label style="margin-left: 20px; margin-right: 30px">Laptop</label>
                             </div>
                         </td>
                         <td style="width: 30%">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault3">
-                                <label class="form-check-label" for="flexCheckDefault3">Laptop</label>
-                            </div>
-                        </td>
-                        <td style="width: 30%">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value=""
-                                    id="flexCheckDefault4">
-                                <label class="form-check-label" for="flexCheckDefault4">Printer/Scanner</label>
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute">
+                                <label style="margin-left: 20px">Printer/Scanner</label>
                             </div>
                         </td>
                     </tr>
-
                     <tr>
                         <td colspan="2">
                             <div class="form-check" style="position: relative;">
                                 <input class="form-check-input" type="checkbox" style="position: absolute">
-                                <label style="margin-left: 20px ">Data Komunikasi</label>
+                                <label style="margin-left: 20px">Data Komunikasi</label>
                             </div>
                         </td>
                     </tr>
@@ -230,8 +227,7 @@
                         <td colspan="5">
                             <div class="form-check" style="position: relative;">
                                 <input class="form-check-input" type="checkbox" style="position: absolute">
-                                <label class="form-check-label" style="margin-left: 20px ">User ID - Lampirkan
-                                    Form-124
+                                <label class="form-check-label" style="margin-left: 20px">User ID - Lampirkan Form-124
                                     Permintaan User ID</label>
                             </div>
                         </td>
@@ -282,8 +278,175 @@
                 </tbody>
             </table>
         </div>
+        <div style="margin-top: 20px;" class="header">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%; vertical-align: top; text-align: center;">
+                            <span style="font-weight: 600">Request By / Date</span>
+                            <span style="font-weight: 600a">dsasd</span>
+                        </th>
+                        <th style="width: 50%; text-align: center; vertical-align: top;">
+                            <span style="font-weight: 600">Dept / fungsi</span><br>
+                            <span style="font-weight: 600a">dsasd</span>
+                        </th>
+                        <th style="width: 50%; text-align: center; vertical-align: top;">
+                            <span style="font-weight: 600">Approve by supv/Asman/Manager</span>
+                            <span style="font-weight: 600 a">dsasd</span>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <h4 style="margin: 0; text-align: center;"><span style="border-bottom: 1px solid black">FOR IT USE ONLY
+            </span>
+        </h4>
+        <div style=" margin-topt: 40px; margin-left: 10px ">
+            <h5 style="font-weight: 600; margin-bottom: 5px;">IT RECOMMENDATION</h5>
+            <table style="margin-left: 40px; margin-top: 0; width: 100%">
+                <tbody>
+                    <tr style="margin-left: 40px">
+                        <td style="width: 25% padding: 5px; vertical-align: top;">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute;">
+                                <label style="margin-left: 20px;">Server</label>
+                            </div>
+                        </td>
+                        <td style="width: 25% padding: 5px; vertical-align: top;">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute;">
+                                <label style="margin-left: 20px;">PC</label>
+                            </div>
+                        </td>
+                        <td style="width: 25% padding: 5px; vertical-align: top">
+                            <div class="form-check" style="position: relative;">
+                                <input class="form-check-input" type="checkbox" style="position: absolute;">
+                                <label style="margin-left: 20px; ">Laptop</label>
+                            </div>
+                        </td>
+                        <td
+                            style="vertical-align: top;width: 50%; max-width: 40%; padding-right: 15%; text-align: justify;">
+                            <span style="font-weight: 600; margin-top: 20px; ">Reason :</span>
+                            <span style="border-bottom: 1px solid black; width: 30%; ">Lorem ipsum dolor sit
+                                amet consectetur adipisicing elit. Tempora
+                                eos
+                                voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="margin-top: 30px;" class="header">
+                <table class="table" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%; vertical-align: top; text-align: center;">
+                                <span style="font-weight: 600;">Assigned by / Date</span><br>
+                                <span style="font-weight: 600;">dsasd</span>
+                            </th>
+                            <th style="width: 40%; text-align: center; vertical-align: top;">
+                                <span style="font-weight: 600;">Approve by supv/Asman/Manager</span><br>
+                                <span style="font-weight: 600;">dsasd</span>
+                            </th>
+                            <th style="width: 30%; text-align: center; vertical-align: top;">
+                                <div style="display: flex; align-items: center;">
+                                    <span style="font-weight: 600; font-size: 12px;">PRIORITY</span>
+                                    <table style="border-collapse: collapse; width: 100%; text-align: center">
+                                        <tr style="border: none;">
+                                            <td style="border: none; width: 33%; position: relative">
+                                                <input class="form-check-input" style="position: absolute"
+                                                    type="checkbox" id="priority1">
+                                                <label class="form-check-label" style="margin-left: 30px"
+                                                    for="priority1">1</label>
+                                            </td>
+                                            <td style="border: none; width: 33%; position: relative">
+                                                <input class="form-check-input" type="checkbox" id="priority2"
+                                                    style="position: absolute">
+                                                <label class="form-check-label" for="priority2"
+                                                    style="margin-left: 30px">2</label>
+                                            </td>
+                                            <td style="border: none; width: 33%; position: relative">
+                                                <input class="form-check-input" type="checkbox" id="priority3"
+                                                    style="position: absolute">
+                                                <label class="form-check-label"
+                                                    for="priority3"style="margin-left: 30px">3</label>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div style="margin-top: 20px; ">
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: top; max-width: 100%; text-align: justify;">
+                                <span style="font-weight: 600;">Action :</span> <span
+                                    style="border-bottom: 1px solid black; line-height: 20px">Lorem
+                                    ipsum dolor sit
+                                    amet consectetur adipisicing elit. Tempora
+                                    eos
+                                    voluptate at amet esse ea aliquid illum animi sit? Quod ea quasi omnis recusandae
+                                    vel
+                                    suscipit
+                                    mollitia unde explicabo animi! lorem21</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div style="margin-top: 30px; width: 100%;">
+                <table class="info-table" style="width: 100%; height: 10%;">
+                    <thead style="margin-bottom: 0;">
+                        <tr>
+                            <td style="vertical-align: top; text-align: justify; width: 32%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 70px">Estimated Work</span> :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asdas</span>
+                            </td>
+                            <td style="vertical-align: top; width: 32%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 30px; font-size: 12px">Est Expenseve
+                                    Amounds(US$)</span>
+                                :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asda</span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 113px">Start Date</span> :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                            </td>
+                            <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 70px">Completion Date</span> :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 88px">Completed by</span> :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                            </td>
+                            <td style="vertical-align: top; text-align: justify; width: 50%; padding-right: 10%;">
+                                <span style="font-weight: 600; margin-right: 73px">User Acceptance</span> :
+                                <span
+                                    style="border-bottom: 1px solid black; line-height: 30px; padding-bottom: 10px">asd</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
 </body>
 
 </html>

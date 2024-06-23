@@ -72,7 +72,6 @@
                                             </a>
                                         @endif
 
-
                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editModal{{ $loop->iteration }}">
                                             <i class="ti ti-edit"></i>

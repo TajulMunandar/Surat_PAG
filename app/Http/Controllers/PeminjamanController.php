@@ -164,22 +164,26 @@ class PeminjamanController extends Controller
 
     public function generatePDF(Surat $surat_peminjaman)
     {
-        // $informasi = InformasiUmum::where('surat_id', $surat_jsa->id)->first();
-        // $alat = AlatPelindung::where('surat_id', $surat_jsa->id)->get();
-        // $uraians = Uraian::where('surat_id', $surat_jsa->id)->get();
+        $informasi = InformasiUmumPeminjaman::with('divisi')->where('surat_id', $surat_peminjaman->id)->first();
+        $DOS = DescriptionOfService::where('surat_id', $surat_peminjaman->id)->get();
+        $TOS = TypeOfService::where('surat_id', $surat_peminjaman->id)->get();
+        $status_peminjaman = StatusPeminjaman::where('surat_id', $surat_peminjaman->id)->get();
+        $aksi = AksiPeminjaman::where('surat_id', $surat_peminjaman->id)->get();
+
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isRemoteEnabled', true);
 
         $pdf = new Dompdf($options);
 
-        $htmlContent = view('template.peminjaman', compact('surat_peminjaman'))->render();
+        // Menggabungkan semua data yang akan dikirim ke view menggunakan compact
+        $htmlContent = view('template.peminjaman', compact('surat_peminjaman', 'informasi', 'DOS', 'TOS', 'status_peminjaman', 'aksi'))->render();
         $pdf->loadHtml($htmlContent);
-        $pdf->setPaper('legal', 'potrait');
+        $pdf->setPaper('legal', 'portrait');
 
         $pdf->render();
 
         // Parameter 'false' untuk menampilkan PDF di browser tanpa memaksa unduhan
-        return $pdf->stream('peminajamn.pdf', ['Attachment' => false]);
+        return $pdf->stream('peminjaman.pdf', ['Attachment' => false]);
     }
 }

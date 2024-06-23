@@ -14,4 +14,9 @@ class InformasiUmumPeminjaman extends Model
     {
         return $this->belongsTo(Surat::class, 'surat_id');
     }
+
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
 }

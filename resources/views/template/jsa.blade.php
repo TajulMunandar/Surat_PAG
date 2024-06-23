@@ -105,7 +105,7 @@
         <h2 style="text-align: center; color: green;">ANALISA KESELAMATAN PEKERJAAN (JOB SAFETY ANALYSIS)</h2>
         <h3 style="margin-bottom: 0px"><span style="margin-right: 20px">I. </span>INFORMASI UMUM</h3>
         <div style="margin-bottom: 10px;">
-            <table border class="info-table" style="width: 100%; height: 10%;">
+            <table class="info-table" style="width: 100%; height: 10%;">
                 <thead style="margin-bottom: 0; ">
                     <tr>
                         <td rowspan="4"
