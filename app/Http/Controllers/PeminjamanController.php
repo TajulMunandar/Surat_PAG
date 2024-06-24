@@ -210,6 +210,6 @@ class PeminjamanController extends Controller
         $pdf->render();
 
         // Parameter 'false' untuk menampilkan PDF di browser tanpa memaksa unduhan
-        return $pdf->stream('peminjaman.pdf', ['Attachment' => false]);
+        return $pdf->stream('peminjaman.pdf');
     }
 }
